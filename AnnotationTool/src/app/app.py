@@ -1,7 +1,8 @@
 import sys
+import whisper
 
 from PyQt6.QtCore import QSize, Qt, QUrl
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QWidget, QVBoxLayout, QToolBar
 from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 
@@ -33,12 +34,31 @@ class MainWindow(QMainWindow):
       player.setVideoOutput(self.videoWidget)
       self.player = player
 
+      #control Bar for player
+
+      #Play Button
+      playButton = QPushButton("Play",parent=centralWidget)
+      playButton.setFixedSize(60,25)
+      layout.addWidget(playButton)
+      playButton.clicked.connect(self.player.play)
+
+      pauseButton = QPushButton("Pause",parent=centralWidget)
+      pauseButton.setFixedSize(60,25)
+      layout.addWidget(pauseButton)
+      pauseButton.clicked.connect(self.player.pause)
+
+
       #Button to open File explorer
       self.button = QPushButton("Open File", self)
       self.button.setGeometry(150, 150, 100, 30)
       layout.addWidget(self.button)
 
-      file = self.button.clicked.connect(self.openFileDialog)    
+      self.button.clicked.connect(self.openFileDialog)
+
+      self.button = QPushButton("Generate", self)
+      self.button.setGeometry(150, 150, 100, 30)
+      layout.addWidget(self.button)
+      self.button.clicked.connect(self.generateTranscript)
   
   
   #TODO: add filter for file types so that only audio/video files can be selected
@@ -52,20 +72,14 @@ class MainWindow(QMainWindow):
          selected_files = file_dialog.selectedFiles()
          print("Selected File:", selected_files[0])
          self.player.setSource(QUrl.fromLocalFile(selected_files[0]))
-         self.player.play()
-
-
-
+         self.current_file = selected_files[0]
 
 app = QApplication(sys.argv)
 
-# Create a Qt widget, which will be our window.
+# Create a Qt widget, which will be the main window.
 window = MainWindow()
 window.show()  # IMPORTANT!!!!! Windows are hidden by default.
 
 # Start the event loop.
 app.exec()
 
-
-# Your application won't reach here until you exit and the event
-# loop has stopped.
