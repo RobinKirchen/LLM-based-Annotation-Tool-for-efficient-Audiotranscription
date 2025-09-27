@@ -73,6 +73,16 @@ class MainWindow(QMainWindow):
          print("Selected File:", selected_files[0])
          self.player.setSource(QUrl.fromLocalFile(selected_files[0]))
          self.current_file = selected_files[0]
+         print("FIle:", selected_files[0])
+         
+  def generateTranscript(self):
+     #File not found error due to ffmpeg not being installed
+     # -> TODO done: install ffmpeg on windows. Set environment variable
+     model = whisper.load_model("turbo")
+     print(self.current_file)
+     result = model.transcribe(self.current_file)
+     print(result["text"])
+
 
 app = QApplication(sys.argv)
 
