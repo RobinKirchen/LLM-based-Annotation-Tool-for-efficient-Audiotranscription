@@ -1,2 +1,7 @@
 https://github.com/openai/whisper --> Install whisper, tiktoken, and ffmpeg
 https://doc.qt.io/qtforpython-6/index.html
+
+
+ffmpeg:
+https://ffmpeg.org Official site
+https://www.gyan.dev/ffmpeg/builds Download site
