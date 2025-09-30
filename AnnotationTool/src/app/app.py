@@ -2,7 +2,7 @@ import sys
 import whisper
 
 from PyQt6.QtCore import QSize, Qt, QUrl
-from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QWidget, QVBoxLayout, QToolBar
+from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QWidget, QVBoxLayout, QHBoxLayout
 from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 
@@ -23,9 +23,9 @@ class MainWindow(QMainWindow):
       #set a Widget into the main window to create a custom layout cauze you cannot override the main window layout
       self.setCentralWidget(centralWidget)
 
-      #Video Player 
+      #Video Player
       self.videoWidget = QVideoWidget()
-      layout.addWidget(self.videoWidget)
+      layout.addWidget(self.videoWidget, stretch=1)
 
       #Audio Player
       self.audio_output = QAudioOutput()
@@ -35,16 +35,21 @@ class MainWindow(QMainWindow):
       self.player = player
 
       #control Bar for player
+      videoControls = QWidget(parent=centralWidget)
+      videoControlsLayout = QHBoxLayout()
+      videoControls.setLayout(videoControlsLayout)
+      layout.addWidget(videoControls)
 
       #Play Button
-      playButton = QPushButton("Play",parent=centralWidget)
+      playButton = QPushButton("Play",parent=videoControls)
       playButton.setFixedSize(60,25)
-      layout.addWidget(playButton)
+      videoControlsLayout.addWidget(playButton)
       playButton.clicked.connect(self.player.play)
 
-      pauseButton = QPushButton("Pause",parent=centralWidget)
+      #Pause Button
+      pauseButton = QPushButton("Pause",parent=videoControls)
       pauseButton.setFixedSize(60,25)
-      layout.addWidget(pauseButton)
+      videoControlsLayout.addWidget(pauseButton)
       pauseButton.clicked.connect(self.player.pause)
 
 
