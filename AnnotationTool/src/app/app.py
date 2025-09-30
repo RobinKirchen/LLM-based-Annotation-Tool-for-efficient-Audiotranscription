@@ -35,6 +35,11 @@ class MainWindow(QMainWindow):
       self.player = player
 
       #control Bar for player
+      #TODO's: 
+        # add interactive progress bar
+        # add rewind and fast forward buttons with set intervalls (e.g skipp 5s on use)
+        # change play and pause into a single button
+        # change buttons to display icons instead of text
       videoControls = QWidget(parent=centralWidget)
       videoControlsLayout = QHBoxLayout()
       videoControls.setLayout(videoControlsLayout)
