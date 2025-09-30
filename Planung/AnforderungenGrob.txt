@@ -1,0 +1,34 @@
+Anforderungen:
+	- Laden einer Audio/Videodatei
+	- Darstellung des Videos in einem Fenster
+		- Darstellung des Videos kann aktiviert/deaktiviert werden
+	- Darstellung der Audiodatei als Spektrogramm
+	- Video/Audiodatei kann per Knopfdruck abgespielt und pausiert werden.
+	- Es kann per Knopfdruck Vor- und Zurückgespult werden
+	- Dauer der Datei in Minuten wird angezeigt
+	- Möglichkeit per Klick auf einer Fortschrittsanzeige/Spektrogramm zu einem bestimmten Zeitpunkt in der Datei zu springen und diese von diesem Zeitpunkt aus abzuspielen.
+	- Knopf zum Exportieren des fertigen Transkripts als .json Datei
+	- Knopf zum Laden einer unfertigen Bearbeitung
+	- Knopf zum Speichern einer unfertigen Bearbeitung
+		- Bearbeitungsfortschritt bleibt erhalten -> Laden einer unfertigen Bearbeitung springt zum ersten nicht als bearbeitet markierten Block
+	- Knopf zur Auswahl des zu nutzenden KI-Systems
+
+
+	- Automatische Generierung eines Transkripts durch eine künstliche Intelligenz:
+		- Generiert Elemente bestehend aus:
+			- gesprochener Text, 
+			- Zeitstempel von Beginn und Ende eines Satzes (evtl. Beginn und Ende nur abhängig von sprecher -> evtl. mehrere gesprochene Sätze statt pro Satz)
+			- Sprecherunterscheidung
+	- Darstellen dieser Angaben in interaktiven Blöcken zur manuellen Nachbearbeitung
+		- Block besteht aus: Anfangs und Endzeitpunkt, Sprecher und dem gesprochenen Wort
+	- Manuelle Nachbearbeitung:
+		- Zoomen/Scrollen innerhalb des Spektrogramms um die Detailgenauigkeit zu erhöhen
+		- Einfügen neuer Elemente
+		- Löschen/Bearbeiten bestehender Elemente
+			- Neu setzen der Zeitstempel
+				- Setzen der Zeitstempel ist per Tastenkürzel möglich -> Anforderung: Effizientes Erstellen eines Transkripts
+			- Angeben des Sprechers/ Hinzufügen eines weiteren Sprecher(falls zu wenig Sprecher erkannt wurden)
+			- Korrektur des erfassten Texts -> Möglichkeit zur Änderung einzelner Buchstaben/Worte
+			- Einfärben von Blöcken um diese als geprüft/bearbeitet zu markieren
+			- Kategorie angeben (Satz, Einzelwort...)
+	- Genutztes KI-System ist austauschbar
