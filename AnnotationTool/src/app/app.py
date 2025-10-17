@@ -1,6 +1,6 @@
 import sys
-import whisper
 from tableModel import TableModel
+from autoTranscriber import AutoTranscriber
 from PyQt6.QtCore import QSize, Qt, QUrl
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QWidget, QVBoxLayout, QHBoxLayout, QTableView
 from PyQt6.QtMultimedia import QAudioOutput, QMediaPlayer
@@ -95,17 +95,8 @@ class MainWindow(QMainWindow):
   
          
   def generateTranscript(self):
-    #File not found error due to ffmpeg not being installed
-    # -> TODO done: install ffmpeg on windows. Set environment variable
-    model = whisper.load_model("turbo")
-    print(self.current_file)
-    result = model.transcribe(self.current_file)
-    content = result["segments"]
-    data = []
-    for entry in content:
-      data.append([entry["text"], entry["start"], entry["end"]])
-    print(data)
-    self.fillTable(data)
+    self.data = AutoTranscriber.transcribe(self.current_file)
+    self.fillTable(self.data)
 
 
 app = QApplication(sys.argv)

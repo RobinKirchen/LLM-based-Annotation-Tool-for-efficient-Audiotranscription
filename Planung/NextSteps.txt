@@ -1,0 +1,4 @@
+look if ffmpeg can return frequenzy graph/spectrum
+look for PyQt ways to display a spectrum, maybe they have a graph display
+Ways to diplay the current position being played in the graph
+ways to zoome into the graph/
